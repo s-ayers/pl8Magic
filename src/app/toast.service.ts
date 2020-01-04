@@ -8,6 +8,6 @@ export class AppToastService {
     this.toasts.push({ header, body });
   }
   remove(toast) {
-    this.toasts = this.toasts.filter(t => t != toast);
+    this.toasts = this.toasts.filter(t => t !== toast);
   }
 }
