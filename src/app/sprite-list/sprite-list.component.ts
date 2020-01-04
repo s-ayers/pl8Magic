@@ -16,7 +16,7 @@ export class SpriteListComponent {
 
 
   sprites() {
-    let mySprites = [];
+    const mySprites = [];
     for (let [key, value] of Object.entries(this.images)) {
 
       if (value['palette'] === null && value['default_palette'] !== null) {
@@ -32,8 +32,8 @@ export class SpriteListComponent {
   }
 
   getPalettes() {
-    let myPalettes = [];
-    for (let [key, value] of Object.entries(this.palettes)) {
+    const myPalettes = [];
+    for (const [key, value] of Object.entries(this.palettes)) {
       myPalettes.push(value);
     }
 
@@ -48,7 +48,7 @@ export class SpriteListComponent {
    }
   }
 
-  changePreview(sprite:Image.Pl8Image) {
+  changePreview(sprite: Image.Pl8Image) {
 
     this.newPreview.emit(sprite);
   }

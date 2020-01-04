@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build  --outputPath docs --base-href ./ --deploy-url https://cdn.jsdelivr.net/gh/s-ayers/pl8Magic/docs/",
+    "build": "ng build --prod  --outputPath docs --base-href ./ --deploy-url https://cdn.jsdelivr.net/gh/s-ayers/pl8Magic/docs/",
+    "build:dist": "ng build --prod  --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -20,12 +21,13 @@
     "@angular/platform-browser-dynamic": "~8.2.4",
     "@angular/router": "~8.2.4",
     "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "@s-ayers/pl8image": "github:s-ayers/pl8image",
     "bootstrap": "^4.4.1",
     "buffer": "^5.4.3",
     "crypto-js": "^3.1.9-1",
     "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
-    "@s-ayers/pl8image": "github:s-ayers/pl8image",
+    "jquery": "^3.4.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

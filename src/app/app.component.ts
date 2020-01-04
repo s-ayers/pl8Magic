@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
-import {Image, Palette} from '@s-ayers/pl8image';
+import { Image, Palette } from '@s-ayers/pl8image';
 import * as CryptoJS from 'crypto-js';
 import data from './palette.json';
 
@@ -18,17 +18,17 @@ export class AppComponent {
 
   @HostListener('window:drop', ['$event'])
 
-  onDrop(event, data) {
+  onDrop(event) {
     event.preventDefault();
-  
+
     if (event.dataTransfer.items) {
-      for (var i = 0; i < event.dataTransfer.items.length; i++) {
+      for (let i = 0; i < event.dataTransfer.items.length; i++) {
         // If dropped items aren't files, reject them
         if (event.dataTransfer.items[i].kind === 'file') {
-          var file = event.dataTransfer.items[i].getAsFile();
+          const file = event.dataTransfer.items[i].getAsFile();
 
-          if ( this.isPalette(file) ) {
-            this.addPalette(file)
+          if (this.isPalette(file)) {
+            this.addPalette(file);
           } else if (this.isSprite(file.name)) {
             this.addSprite(file);
           }
@@ -36,7 +36,7 @@ export class AppComponent {
       }
     } else {
       // Use DataTransfer interface to access the file(s)
-      for (var i = 0; i < event.dataTransfer.files.length; i++) {
+      for (let i = 0; i < event.dataTransfer.files.length; i++) {
         // console.log('... file[' + i + '].name = ' + event.dataTransfer.files[i].name);
         // console.log('isSprint: ' + this.isSprite(event.dataTransfer.files[i].name));
         // console.log('isPalette: ' + this.isPalette(event.dataTransfer.files[i]));
@@ -51,12 +51,12 @@ export class AppComponent {
 
   isSprite(filename: string): boolean {
     const split = filename.split('.');
-    return (split.length === 2 && split[1].toLocaleLowerCase() === 'pl8') 
+    return (split.length === 2 && split[1].toLocaleLowerCase() === 'pl8');
   }
 
   isPalette(file: any): boolean {
     const split = file.name.split('.');
-    const is = (split.length === 2 && split[1] === '256')
+    const is = (split.length === 2 && split[1] === '256');
 
     return is;
   }
@@ -87,6 +87,24 @@ export class AppComponent {
     reader.readAsArrayBuffer(sprite);
   }
 
+
+  exportPalette() {
+    const current = {};
+    Object.keys(this.sprites).forEach(hash => {
+      if (this.sprites[hash]['palette'] !== null) {
+        current[hash] = this.sprites[hash]['palette'];
+      }
+
+    });
+
+    const palette = JSON.stringify(Object.assign({}, data, current), null, 4);
+
+    const link = document.createElement('a');
+    link.download = 'palette.json';
+    link.href = 'data:text/json;charset=UTF-8,' + encodeURIComponent(palette);
+    link.click();
+  }
+
   addPalette(palette: File) {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -96,9 +114,9 @@ export class AppComponent {
       if (!this.palettes.hasOwnProperty(hash)) {
 
         const pal = {
-          'name': palette.name.split('.')[0],
-          'hash': hash,    
-          'palette': Palette.buffer(Buffer.from(reader.result))
+          name: palette.name.split('.')[0],
+          hash: hash,
+          palette: Palette.buffer(Buffer.from(reader.result))
         };
 
         this.palettes[hash] = pal;
@@ -106,16 +124,16 @@ export class AppComponent {
 
     };
     reader.readAsArrayBuffer(palette);
-  
-    }
-    setPreview(event) {
-      // console.log(event);
-      this.preview = event;
-    }
+
+  }
+  setPreview(event) {
+    // console.log(event);
+    this.preview = event;
+  }
   private arrayBufferToWordArray(ab) {
-    var i8a = new Uint8Array(ab);
-    var a = [];
-    for (var i = 0; i < i8a.length; i += 4) {
+    const i8a = new Uint8Array(ab);
+    const a = [];
+    for (let i = 0; i < i8a.length; i += 4) {
       a.push(i8a[i] << 24 | i8a[i + 1] << 16 | i8a[i + 2] << 8 | i8a[i + 3]);
     }
     return CryptoJS.lib.WordArray.create(a, i8a.length);

@@ -19,21 +19,13 @@ export class PreviewComponent implements OnInit {
 
   async preview() {
 
-
-    // console.log(this.data);
     if ( this.data !== null && this.data.palette !== null && this.palettes.hasOwnProperty(this.data.palette)) {
-      // this.imageData = "Processing";
-      // console.log('preview');
-      let palette = this.palettes[this.data.palette].palette;
-      // console.log(palette);
+      const palette = this.palettes[this.data.palette].palette;
       const binImage = await this.data.Orthogonal(palette).toPNG();
-      // console.log(`BinData: ${binImage}`);
       const sanData = this.sanitizer.bypassSecurityTrustStyle( binImage.toString('base64') );
 
-      this.imageData = "data:image/png;base64," + sanData['changingThisBreaksApplicationSecurity'];
-      // console.log(this.imageData);
-     
+      this.imageData = 'data:image/png;base64,' + sanData['changingThisBreaksApplicationSecurity'];
+
     }
-    // return this.imageData;
   }
 }
