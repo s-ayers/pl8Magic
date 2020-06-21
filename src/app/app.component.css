@@ -1,3 +1,21 @@
 ngb-accordian {
     max-height: calc(100vh - 9rem);
 }
+
+div.row.preview-wrapper {
+    /* float: right; */
+    margin-top: 15px;
+    margin-left: 300px;
+}
+
+app-sprite-list {
+    position: fixed;
+    float: left;
+    height: 100%;
+    left: 0;
+    top: 60px;
+    display: block;
+    width: 290px;
+    width: 17rem;
+    display: block;
+}

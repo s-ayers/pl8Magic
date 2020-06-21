@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import {Image} from '@s-ayers/pl8image';
+import { Image } from '@s-ayers/pl8image';
 import { isNumber } from 'util';
 
 
@@ -13,17 +13,33 @@ export class SpriteListComponent {
   @Input() images: any;
   @Input() palettes: any;
   @Output() newPreview = new EventEmitter();
-
+  keyword: string = '';
+  missingPalette: boolean = false;
 
   sprites() {
     const mySprites = [];
-    for (let [key, value] of Object.entries(this.images)) {
 
+    for (let [key, value] of Object.entries(this.images)) {
+      let add =true;
       if (value['palette'] === null && value['default_palette'] !== null) {
         value['palette'] = value['default_palette'];
       }
+      // console.log(value['palette']);
+      if (this.missingPalette && value['palette'] !== null) {
+        add = false;
+      }
+      if (this.keyword.length > 0) {
 
-      mySprites.push(value);
+        if (value['name'].toLowerCase().indexOf(this.keyword.toLowerCase()) === -1) {
+          add = false;
+        }
+
+      }
+      if (add) {
+        mySprites.push(value);
+      }
+
+
     }
 
     return mySprites.sort((first, second) => {
@@ -43,14 +59,15 @@ export class SpriteListComponent {
   }
 
   typeString(type: number) {
-   if (isNumber(type)) {
+    if (isNumber(type)) {
       return Image.TYPE[type];
-   }
+    }
   }
 
   changePreview(sprite: Image.Pl8Image) {
 
     this.newPreview.emit(sprite);
   }
+
 
 }
