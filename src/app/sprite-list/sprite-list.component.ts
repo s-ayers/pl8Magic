@@ -20,7 +20,7 @@ export class SpriteListComponent {
     const mySprites = [];
 
     for (let [key, value] of Object.entries(this.images)) {
-      let add =true;
+      let add = true;
       if (value['palette'] === null && value['default_palette'] !== null) {
         value['palette'] = value['default_palette'];
       }
