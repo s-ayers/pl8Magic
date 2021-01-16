@@ -57,7 +57,11 @@
               [attr.selected]="sprite.palette===pal.hash ? true : null">{{pal.name}}</option>
           </select>
         </div>
-        <ng-container *ngFor="let tile of sprite.tiles">
+        <ng-container *ngFor="let tile of sprite.tiles; let i = index">
+          <div class="row">
+            <div class="col-5">Sprite {{i + 1}}</div>
+            <div class="col-7">{{tile.offset}}</div>
+          </div>
           <div class="row">
             <div class="col-5">x:</div>
             <div class="col-7">{{tile.x}}</div>
