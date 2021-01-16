@@ -17,15 +17,14 @@ export class AppComponent {
   preview: Image.Pl8Image = null;
 
   @HostListener('window:drop', ['$event'])
-
   onDrop(event) {
     event.preventDefault();
 
     if (event.dataTransfer.items) {
-      for (let i = 0; i < event.dataTransfer.items.length; i++) {
+      for (const item of event.dataTransfer.items) {
         // If dropped items aren't files, reject them
-        if (event.dataTransfer.items[i].kind === 'file') {
-          const file = event.dataTransfer.items[i].getAsFile();
+        if (item.kind === 'file') {
+          const file = item.getAsFile();
 
           if (this.isPalette(file)) {
             this.addPalette(file);
@@ -33,13 +32,6 @@ export class AppComponent {
             this.addSprite(file);
           }
         }
-      }
-    } else {
-      // Use DataTransfer interface to access the file(s)
-      for (let i = 0; i < event.dataTransfer.files.length; i++) {
-        // console.log('... file[' + i + '].name = ' + event.dataTransfer.files[i].name);
-        // console.log('isSprint: ' + this.isSprite(event.dataTransfer.files[i].name));
-        // console.log('isPalette: ' + this.isPalette(event.dataTransfer.files[i]));
       }
     }
   }

@@ -270,13 +270,17 @@
 
 <app-toolbar (exportPalette)="exportPalette()"></app-toolbar>
 
-<div class="row" style="margin-top: 15px;max-height: 100%">
-  <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-    <app-sprite-list (newPreview)="setPreview($event)" [images]="sprites" [palettes]="palettes"></app-sprite-list>
-  </div>
-  <div class="col-9">
-    <app-preview [data]="preview" [palettes]="palettes"></app-preview>
-  </div>
-</div>
+<aside>
+  <app-sprite-list (newPreview)="setPreview($event)" [images]="sprites" [palettes]="palettes"></app-sprite-list>
+</aside>
+
+<!-- <div class="row" style="margin-top: 15px;max-height: 100%">
+  <div class="col-12 col-md-4 col-xl-3 bd-sidebar">
+
+  </div> -->
+  <div class="row  preview-wrapper">
+    <app-preview [palettes]="palettes"></app-preview>
+ </div>
+
 
 <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

@@ -1,5 +1,23 @@
-<div>
-    <button (click)="preview()">Preview</button>
-    <br/>
-    <img  src="{{imageData}}"/>
-</div>
+<p-tabView >
+    <p-tabPanel header="Image" leftIcon="pi pi-image"  [selected]="true">
+        <ng-container *ngIf="processing">
+            <i class="pi pi-spin pi-spinner" style="font-size: 3em"></i>
+        </ng-container>
+        <ng-container *ngIf="!processing">
+            <img  src="{{imageData}}"/>
+        </ng-container>
+
+    </p-tabPanel>
+    <p-tabPanel header="Tiles" *ngIf="data" leftIcon="pi pi-images">
+        <div class="row"  *ngFor="let tile of data.tiles">
+            <div class="col-12">
+                <img  src="{{imageData}}"/>
+            </div>
+        </div>
+
+    </p-tabPanel>
+</p-tabView>
+
+<!-- <div>
+    <button class="btn btn-success" (click)="preview()">Preview</button>
+</div> -->

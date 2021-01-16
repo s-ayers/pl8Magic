@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 
+import { TabViewModule } from 'primeng/tabview';
+
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SpriteListComponent } from './sprite-list/sprite-list.component';
@@ -21,7 +23,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
   imports: [
     BrowserModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    TabViewModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
@@ -29,4 +32,4 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 export class AppModule {
   constructor() {
   }
- }
+}
