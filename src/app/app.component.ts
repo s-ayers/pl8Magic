@@ -17,7 +17,6 @@ export class AppComponent {
   preview: Image.Pl8Image = null;
 
   @HostListener('window:drop', ['$event'])
-
   onDrop(event) {
     event.preventDefault();
 

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Image } from '@s-ayers/pl8image';
 import { isNumber } from 'util';
+import { ImageService } from '../services/image.service';
 
+declare const window;
 
 @Component({
   selector: 'app-sprite-list',
@@ -15,6 +17,10 @@ export class SpriteListComponent {
   @Output() newPreview = new EventEmitter();
   keyword: string = '';
   missingPalette: boolean = false;
+
+  constructor(private imageService: ImageService) {
+
+  }
 
   sprites() {
     const mySprites = [];
@@ -65,8 +71,10 @@ export class SpriteListComponent {
   }
 
   changePreview(sprite: Image.Pl8Image) {
-
-    this.newPreview.emit(sprite);
+    console.log('Change Preview');
+    // this.newPreview.emit(sprite);
+    window['sprite'] = sprite;
+    this.imageService.setActive(sprite);
   }
 
 
