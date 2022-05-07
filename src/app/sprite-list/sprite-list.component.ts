@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Image } from '@s-ayers/pl8image';
 import { isNumber } from 'util';
 import { ImageService } from '../services/image.service';
@@ -15,8 +15,8 @@ export class SpriteListComponent {
   @Input() images: any;
   @Input() palettes: any;
   @Output() newPreview = new EventEmitter();
-  keyword: string = '';
-  missingPalette: boolean = false;
+  keyword = '';
+  missingPalette = false;
 
   constructor(private imageService: ImageService) {
 
@@ -25,12 +25,11 @@ export class SpriteListComponent {
   sprites() {
     const mySprites = [];
 
-    for (let [key, value] of Object.entries(this.images)) {
+    for (const [key, value] of Object.entries(this.images)) {
       let add = true;
       if (value['palette'] === null && value['default_palette'] !== null) {
         value['palette'] = value['default_palette'];
       }
-      // console.log(value['palette']);
       if (this.missingPalette && value['palette'] !== null) {
         add = false;
       }
@@ -73,7 +72,7 @@ export class SpriteListComponent {
   changePreview(sprite: Image.Pl8Image) {
     console.log('Change Preview');
     // this.newPreview.emit(sprite);
-    window['sprite'] = sprite;
+    window.sprite = sprite;
     this.imageService.setActive(sprite);
   }
 

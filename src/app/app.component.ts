@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Image, Palette } from '@s-ayers/pl8image';
 import * as CryptoJS from 'crypto-js';
 import data from './palette.json';
@@ -84,7 +84,7 @@ export class AppComponent {
     const current = {};
     Object.keys(this.sprites).forEach(hash => {
       if (this.sprites[hash]['palette'] !== null) {
-        current[hash] = this.sprites[hash]['palette'];
+        current[hash] = this.sprites[hash].palette;
       }
 
     });
@@ -107,7 +107,7 @@ export class AppComponent {
 
         const pal = {
           name: palette.name.split('.')[0],
-          hash: hash,
+          hash,
           palette: Palette.buffer(Buffer.from(reader.result))
         };
 
