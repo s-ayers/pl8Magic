@@ -23,9 +23,8 @@ export class PreviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
+
     this.imageService.active.subscribe((image) => {
-      console.log('preview component');
       if (image !== null) {
         this.data = image;
         this.processing = true;
@@ -40,14 +39,11 @@ export class PreviewComponent implements OnInit {
   async preview() {
     if (
       this.data !== null &&
-      // this.data !== undefined &&
       this.data.palette !== null &&
       this.palettes.hasOwnProperty(this.data.palette)
     ) {
       const palette = this.palettes[this.data.palette].palette;
-      // const binImage = await this.data.Orthogonal(palette).toPNG();
-      console.log(this.data);
-      const binImage = GraphicFactory.tiles(this.data.tiles, palette, null, 640, 480);
+      const binImage = GraphicFactory.Pl8(this.data, palette);
       const strImage = await binImage.toPNG();
 
       const sanData = this.sanitizer.bypassSecurityTrustStyle(

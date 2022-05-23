@@ -119,7 +119,6 @@ export class AppComponent {
 
   }
   setPreview(event) {
-    // console.log(event);
     this.preview = event;
   }
   private arrayBufferToWordArray(ab) {
