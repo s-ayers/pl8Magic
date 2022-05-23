@@ -70,8 +70,6 @@ export class SpriteListComponent {
   }
 
   changePreview(sprite: Image.Pl8Image) {
-    console.log('Change Preview');
-    // this.newPreview.emit(sprite);
     window.sprite = sprite;
     this.imageService.setActive(sprite);
   }
